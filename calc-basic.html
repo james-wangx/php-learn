@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>计算器基础版</title>
+
+  <style>
+    #outside {
+      width: 460px;
+      height: 524px;
+      margin: auto;
+      border-radius: 10px;
+      background-color: gray;
+    }
+
+    #top {
+      width: 456px;
+      height: 50px;
+      margin: auto;
+    }
+
+    #top .point {
+      width: 20px;
+      height: 20px;
+      float: left;
+      margin-top: 15px;
+      margin-left: 6px;
+      border-radius: 10px;
+    }
+
+    #top .red {
+      background-color: red;
+    }
+
+    #top .blue {
+      background-color: blue;
+    }
+
+    #top .green {
+      background-color: green;
+    }
+
+    #calc-title {
+      font-size: 23px;
+      color: white;
+      float: right;
+      margin: 10px 10px 0 0;
+    }
+
+    #result {
+      margin: auto;
+      text-align: center;
+    }
+
+    #result div {
+      width: 434px;
+      height: 46px;
+      margin: auto;
+      font-size: 30px;
+      text-align: right;
+      padding-right: 10px;
+      border-width: 0;
+      border-radius: 10px;
+      background-color: white;
+    }
+
+    #result div:hover {
+      outline: solid 2px red;
+    }
+
+    #button {
+      width: 452px;
+      height: 422px;
+      margin: auto;
+      padding: 2px 2px 0 2px;
+    }
+
+    #button div {
+      width: 109px;
+      height: 80px;
+      float: left;
+      margin: 2px;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      line-height: 80px;
+      user-select: none;
+      background-color: #7fffd4;
+    }
+
+    #button div:hover {
+      font-size: 30px;
+      font-weight: bolder;
+      background-color: orangered;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="outside">
+    <div id="top">
+      <div class="point red"></div>
+      <div class="point blue"></div>
+      <div class="point green"></div>
+      <div id="calc-title">计算器</div>
+    </div>
+
+    <div id="result">
+      <div></div>
+    </div>
+
+    <div id="button">
+      <!-- onclick：单击时执行 -->
+      <div onclick="clean()">AC</div>
+      <div>+/-</div>
+      <div onclick="clickOperator('%')">%</div>
+      <div onclick="clickOperator('÷')">÷</div>
+      <div onclick="clickNumber(7)">7</div>
+      <div onclick="clickNumber(8)">8</div>
+      <div onclick="clickNumber(9)">9</div>
+      <div onclick="clickOperator('×')">×</div>
+      <div onclick="clickNumber(4)">4</div>
+      <div onclick="clickNumber(5)">5</div>
+      <div onclick="clickNumber(6)">6</div>
+      <div onclick="clickOperator('-')">-</div>
+      <div onclick="clickNumber(1)">1</div>
+      <div onclick="clickNumber(2)">2</div>
+      <div onclick="clickNumber(3)">3</div>
+      <div onclick="clickOperator('+')">+</div>
+      <div onclick="clickNumber(0)" style="border-bottom-left-radius: 10px">0</div>
+      <div onclick="back()">Del</div>
+      <div onclick="clickOperator('.')">.</div>
+      <div onclick="calc()" style="border-bottom-right-radius: 10px">=</div>
+    </div>
+  </div>
+</body>
+
+<script type="text/javascript">
+  let result = document.querySelector("#result div");
+
+  // 键盘输入
+  document.addEventListener('keydown', (evt) => {
+    let key = evt.key;
+    switch (key) {
+      case "Enter":
+        calc();
+        break;
+      case "Escape":
+        result.style = "outline-width: 0;";
+        clean();
+        break;
+      case "Backspace":
+        back();
+        break;
+      default:
+        if ("+-*/%.".indexOf(key) !== -1) {
+          result.style = "outline: solid 2px red;";
+          if (key === '*') {
+            clickOperator('×');
+          } else if (key === "/") {
+            clickOperator('÷');
+          } else {
+            clickOperator(key);
+          }
+        } else if (/^[0-9]$/.test(key)) {
+          result.style = "outline: solid 2px red;";
+          clickNumber(key);
+        }
+        break;
+    }
+  });
+
+  // Enter 键快捷输入
+  document.addEventListener('keypress', (evt) => {
+    if (evt.key === "Enter")
+      // result.blur() 取消聚焦
+      result.focus();
+  })
+
+  /**
+   * 在结果框显示数字
+   * @param number 传入的数字
+   */
+  function clickNumber(number) {
+    result.innerText += number;
+  }
+
+  /**
+   * 在结果框显示运算符
+   * @param operator 传入的运算符
+   */
+  function clickOperator(operator) {
+    let expression = result.innerText;
+    let len = expression.length;
+    let last = expression[len - 1];
+
+    // 禁止连续输入符号
+    if (expression === "" && ("+×÷%.".indexOf(operator) !== -1))
+      return;
+    else if ("+-×÷%.".indexOf(last) !== -1)
+      return;
+
+    result.innerText += operator;
+  }
+
+  /**
+   * 计算并显示结果
+   */
+  function calc() {
+    let expression = result.innerText;
+    let newExpression = "";
+    let char = ""
+
+    // 替换符号：* => ×, ÷ => /
+    for (let i = 0; i < expression.length; i++) {
+      char = expression[i];
+      if (char === "÷")
+        char = "/"
+      else if (expression[i] === "×")
+        char = "*"
+      newExpression += char
+    }
+
+    result.innerText = eval(newExpression);
+  }
+
+  /**
+   * 清空结果
+   */
+  function clean() {
+    result.innerText = null;
+  }
+
+  /**
+   * 删除一个字符或数字
+   */
+  function back() {
+    let expression = result.innerText;
+    let len = expression.length;
+    result.innerText = expression.substring(0, len - 1);
+  }
+</script>
+</html>
