@@ -46,3 +46,12 @@ echo $result . "<br>";
 
 if ("100" == 100)
     echo "两者相等<br>";
+
+$i = date("s");
+while ($i <= 30) {
+    ob_flush(); // 清空缓冲区，直接输出
+    flush();
+    echo date("Y-m-d H:i:s") . "<br>";
+    $i = date("s");
+    sleep(1);
+}

@@ -1,0 +1,52 @@
+#title {
+    margin-top: 300px;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.form {
+    width: 350px;
+    height: 35px;
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.code input {
+    float: left;
+    width: 140px;
+}
+
+.code button {
+    width: 90px;
+    height: 35px;
+    margin-left: 20px;
+}
+
+label {
+    width: 77px;
+    float: left;
+    font-size: 20px;
+    line-height: 35px;
+    margin-left: 15px;
+}
+
+input {
+    width: 250px;
+    height: 29px;
+    float: right;
+    font-size: 15px;
+    border-radius: 5px;
+}
+
+button {
+    background-color: dodgerblue;
+    color: whitesmoke;
+    border-radius: 5px;
+}
+
+.login button {
+    width: 350px;
+    height: 35px;
+}
