@@ -8,6 +8,11 @@ $username = $_POST["username"];
 $password = $_POST["password"];
 $code = $_POST["code"];
 
+// 验证码的验证
+if ($code !== "0000") {
+    die("code-error");
+}
+
 // $username = $_GET["username"];
 // $password = $_GET["password"];
 // $code = $_GET["code"];
@@ -35,9 +40,9 @@ $sql = "select * from user where username='$username' and password='$password'";
 $result = mysqli_query($conn, $sql); // $result 获取到的结果，称结果集
 
 if (mysqli_num_rows($result) == 1) {
-    echo "登录成功<br>";
+    echo "login-pass";
 } else {
-    echo "登录失败<br>";
+    echo "login-failed";
 }
 
 // 关闭数据库

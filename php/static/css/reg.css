@@ -13,16 +13,10 @@
     margin-left: auto;
 }
 
-.code input {
-    float: left;
-    width: 140px;
-    margin-left: 5px;
-}
-
 .code button {
     width: 90px;
     height: 35px;
-    float: right;
+    margin-left: 20px;
 }
 
 label {
@@ -41,12 +35,9 @@ input {
 }
 
 button {
+    width: 320px;
+    height: 35px;
     background-color: dodgerblue;
     color: whitesmoke;
     border-radius: 5px;
-}
-
-.login button {
-    width: 320px;
-    height: 35px;
 }
