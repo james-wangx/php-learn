@@ -30,12 +30,19 @@ function verify_user($username, $password)
     mysqli_set_charset($conn, "utf8mb4");
 
     // 拼接 SQL 语句并执行
-    $sql = "select username, password from user where username='$username'";
+    $sql = "select username, password, role from user where username='$username'";
     $result = mysqli_query($conn, $sql); // $result 获取到的结果，称结果集
     $row = mysqli_fetch_array($result);
 
     if (mysqli_num_rows($result) === 1) {
         if ($password === $row["password"]) {
+            // 登录成功后分配一个 Session ID，同时在服务器端记住当前客户端的登录状态
+            session_start(); // 启用 Session 模块
+            $_SESSION["is_login"] = "true";
+            $_SESSION["username"] = $row["username"];
+            $_SESSION["role"] = $row["role"];
+
+
             echo "login-pass";
         } else {
             echo "password-error";

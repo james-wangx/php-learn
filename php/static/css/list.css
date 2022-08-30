@@ -1,0 +1,12 @@
+table {
+    width: 800px;
+    margin-top: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    border-spacing: 0;
+}
+
+td {
+    height: 30px;
+    border-bottom: solid 1px #7f807f;
+}
