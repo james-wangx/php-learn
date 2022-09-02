@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<zone>
+    <short>Public</short>
+    <description>For use in public.</description>
+    <service name="ssh"/>
+    <service name="dhcpv6-client"/>
+    <port protocol="tcp" port="3306"/>
+    <port protocol="tcp" port="6379"/>
+    <port protocol="tcp" port="8080"/>
+    <port protocol="tcp" port="9990"/>
+    <rule family="ipv4">
+        <source address="192.168.112.1"/>
+        <port protocol="tcp" port="80"/>
+        <accept/>
+    </rule>
+</zone>
