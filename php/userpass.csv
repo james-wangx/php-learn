@@ -1,0 +1,5 @@
+username,password,expect
+lm,lmlm123,login-pass
+james,james123,login-pass
+jack,jack123,login-fail
+tom,tom123,login-fail
