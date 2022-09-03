@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf8"?>
 <class id="WNCDC085">
   <student sequence="1">
     <id>WNCD201703015</id>
@@ -16,11 +16,12 @@
     <degree>本科</degree>
     <school>成都理工大学</school>
   </student>
-  <student sequence="5">
+  <student sequence="3">
     <id>WNCD201703025</id>
-    <name>扬大言</name>
+    <name>杨小言</name>
     <sex>女</sex>
     <age>22</age>
+    <degree>大专</degree>
     <school>四川华新现代职业学院</school>
   </student>
 </class>
