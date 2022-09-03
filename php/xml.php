@@ -63,30 +63,43 @@
 //
 // $doc->save("student.xml");
 
-$student01=array("id"=>"WNCD201703015", "name"=>"敬小越", "sex"=>"男", "age"=>"24", "degree"=>"本科", "school"=>"电子科技大学成都学院");
-$student02=array("id"=>"WNCD201703020", "name"=>"何小学", "sex"=>"男", "age"=>"29", "degree"=>"本科", "school"=>"成都理工大学");
-$student03=array("id"=>"WNCD201703025", "name"=>"杨小言", "sex"=>"女", "age"=>"22", "degree"=>"大专", "school"=>"四川华新现代职业学院");
-$students = array($student01, $student02, $student03);
+// $student01=array("id"=>"WNCD201703015", "name"=>"敬小越", "sex"=>"男", "age"=>"24", "degree"=>"本科", "school"=>"电子科技大学成都学院");
+// $student02=array("id"=>"WNCD201703020", "name"=>"何小学", "sex"=>"男", "age"=>"29", "degree"=>"本科", "school"=>"成都理工大学");
+// $student03=array("id"=>"WNCD201703025", "name"=>"杨小言", "sex"=>"女", "age"=>"22", "degree"=>"大专", "school"=>"四川华新现代职业学院");
+// $students = array($student01, $student02, $student03);
+//
+// $doc = new DOMDocument("1.0", "utf8");
+// $doc->preserveWhiteSpace = false;
+// $doc->formatOutput = true;
+//
+// // 创建根节点 class 并设置 id 属性
+// $class = $doc->createElement("class");
+// $class->setAttribute("id", "WNCDC085");
+// $doc->appendChild($class);
+// foreach ($students as $key=>$student) {
+//     // 为 class 节点添加 student 子节点
+//     $nodeStudent = $doc->createElement("student");
+//     $nodeStudent->setAttribute("sequence", $key + 1);
+//     $class->appendChild($nodeStudent);
+//     // 为 student 节点添加 id, name, sex 等子节点
+//     foreach ($student as $key => $value) {
+//         $node = $doc->createElement($key);
+//         $node->nodeValue = $value;
+//         $nodeStudent->appendChild($node);
+//     }
+// }
+//
+// $doc->save("write.xml");
 
-$doc = new DOMDocument("1.0", "utf8");
+// XPATH 定位元素
+$doc = new DOMDocument();
 $doc->preserveWhiteSpace = false;
-$doc->formatOutput = true;
-
-// 创建根节点 class 并设置 id 属性
-$class = $doc->createElement("class");
-$class->setAttribute("id", "WNCDC085");
-$doc->appendChild($class);
-foreach ($students as $key=>$student) {
-    // 为 class 节点添加 student 子节点
-    $nodeStudent = $doc->createElement("student");
-    $nodeStudent->setAttribute("sequence", $key + 1);
-    $class->appendChild($nodeStudent);
-    // 为 student 节点添加 id, name, sex 等子节点
-    foreach ($student as $key => $value) {
-        $node = $doc->createElement($key);
-        $node->nodeValue = $value;
-        $nodeStudent->appendChild($node);
-    }
-}
-
-$doc->save("write.xml");
+$doc->load("student.xml");
+$xpath = new DOMXPath($doc);
+// $expression = "/class/student[@sequence='1']/school";
+// $expression = "/class/student[@sequence='2']/school";
+// $expression = "//student[@sequence='5']/name";
+// $expression = "//student[2]/name"; // 找第二个学生
+$expression = "//student/school[contains(text(), '科技')]"; // 找第二个学生
+$nodes = $xpath->query($expression); // 返回的是找到的所有节点
+echo $nodes->item(0)->nodeValue;
