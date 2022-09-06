@@ -27,7 +27,7 @@ class DB
     /**
      * 类的构造方法：当类在进行实例化时会触发执行该方法
      */
-    public function __construct($host="localhost", $username="root", $password="", $database="learn")
+    public function __construct($host = "localhost", $username = "root", $password = "", $database = "learn")
     {
         $this->host = $host;
         $this->username = $username;
@@ -70,7 +70,8 @@ class DB
      *
      * @return void
      */
-    public function modify($sql) {
+    public function modify($sql)
+    {
         $result = mysqli_query($this->conn, $sql);
 
         if (!$result) {
@@ -79,10 +80,99 @@ class DB
     }
 
     /**
+     * @return mixed|string
+     */
+    public function getHost()
+    {
+        return $this->host;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getDatabase()
+    {
+        return $this->database;
+    }
+
+    /**
+     * @return mysqli|null
+     */
+    public function getConn()
+    {
+        return $this->conn;
+    }
+
+    /**
      * 类的析构方法：当类的实例使用完并从内存中释放时，将会触发调用该方法
      */
     public function __destruct()
     {
         mysqli_close($this->conn);
+    }
+
+    /**
+     * 序列化时自动调用
+     *
+     * @return string[] : 需要实例化的类属性组成的数组
+     */
+    public function __sleep()
+    {
+        echo "DB 类正在被序列化！";
+
+        return array("host", "username", "password", "database");
+    }
+
+    /**
+     * 反序列化时自动调用
+     *
+     * @return void
+     */
+    public function __wakeup()
+    {
+        echo "DB 类正在被反序列化！" . PHP_EOL;
+        $this->conn = $this->createConnection(); // 恢复数据库的连接状态
+    }
+
+    /**
+     * 当调用一个不存在的成员方法时，此方法被调用
+     *
+     * @param $name
+     * @param $arguments
+     *
+     * @return void
+     */
+    public function __call($name, $arguments)
+    {
+        echo "调用的成员方法不存在" . PHP_EOL;
+    }
+
+    /**
+     * 当调用一个不存在的静态方法时，此方法被调用
+     *
+     * @param $name
+     * @param $arguments
+     *
+     * @return void
+     */
+    public static function __callStatic($name, $arguments)
+    {
+        echo "调用的静态方法不存在" . PHP_EOL;
     }
 }
