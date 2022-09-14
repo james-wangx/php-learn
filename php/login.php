@@ -41,8 +41,6 @@ function verify_user($username, $password)
             $_SESSION["is_login"] = "true";
             $_SESSION["username"] = $row["username"];
             $_SESSION["role"] = $row["role"];
-
-
             echo "login-pass";
         } else {
             echo "password-error";

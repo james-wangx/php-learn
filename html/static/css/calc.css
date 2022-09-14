@@ -1,13 +1,13 @@
 #outside {
-    width: 460px;
+    width: 400px;
     height: 524px;
-    margin: auto;
+    margin: 150px auto 0 auto;
     border-radius: 10px;
-    background-color: gray;
+    background-color: #4b4a4a;
 }
 
 #top {
-    width: 456px;
+    width: 396px;
     height: 50px;
     margin: auto;
 }
@@ -22,20 +22,20 @@
 }
 
 #top .red {
-    background-color: red;
+    background-color: #ea3030;
 }
 
 #top .blue {
-    background-color: blue;
+    background-color: #dcc501;
 }
 
 #top .green {
-    background-color: green;
+    background-color: #06c006;
 }
 
 #calc-title {
     font-size: 23px;
-    color: white;
+    color: #efebeb;
     float: right;
     margin: 10px 10px 0 0;
 }
@@ -46,9 +46,9 @@
 }
 
 #result div {
-    width: 434px;
+    width: 374px;
     height: 46px;
-    margin: auto;
+    margin: auto auto 2px auto;
     font-size: 30px;
     text-align: right;
     padding-right: 10px;
@@ -62,27 +62,36 @@
 }
 
 #button {
-    width: 452px;
+    width: 392px;
     height: 422px;
     margin: auto;
     padding: 2px 2px 0 2px;
 }
 
 #button div {
-    width: 109px;
+    width: 94px;
     height: 80px;
     float: left;
+    color: #efebeb;
     margin: 2px;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     text-align: center;
     line-height: 80px;
     user-select: none;
-    background-color: #7fffd4;
+    background-color: #7e7e7e;
 }
 
 #button div:hover {
-    font-size: 30px;
+    font-size: 40px;
     font-weight: bolder;
     background-color: orangered;
+}
+
+#button div.color1 {
+    background-color: #595959;
+}
+
+#button div.yellow {
+    background-color: #ff9700;
 }
