@@ -56,6 +56,7 @@ function register_user($conn, $username, $password, $avatar)
 
 /**
  * 上传头像
+ *
  * @param $tmp_path : 临时路径
  * @param $new_path : 上传路径
  *
