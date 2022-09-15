@@ -35,7 +35,7 @@
     </thead>
     <tbody>
       <?php
-      $conn = mysqli_connect("localhost", "root", "", "learn", 3306) or die("数据库连接不成功");
+      $conn = mysqli_connect("localhost", "root", "mysql", "learn", 3306) or die("数据库连接不成功");
       mysqli_set_charset($conn, "utf8mb4");
 
       $sql = "select articleid, author, headline, viewcount, createtime from article;";

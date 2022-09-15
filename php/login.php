@@ -24,7 +24,7 @@ function verify_code($code)
  */
 function verify_user($username, $password)
 {
-    $conn = mysqli_connect("localhost", "root", "", "learn", 3306) or die("数据库连接不成功");
+    $conn = mysqli_connect("localhost", "root", "mysql", "learn", 3306) or die("数据库连接不成功");
 
     // 设置字符编码
     mysqli_set_charset($conn, "utf8mb4");
